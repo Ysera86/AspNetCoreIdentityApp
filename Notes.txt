@@ -1,0 +1,19 @@
+Https tikli açtýk mvp projesini cookie vs kullanýcaz Identtyde.
+
+
+
+IdentityDbContext ten miras alýcaz. Ondan gelen entityler.
+
+Önemli olan entityler : bulara direk müdahale edebiliyoruz diðerlerine fazladan biþeye gerek olmaz.
+
+IdentityUser
+IdentityRole
+
+public class AppDbContext : IdentityDbContext<AppUser, AppRole, string> // random guid deðerler üretecek
+string için user ve role tablolarýnda primary key tipi alaný : int vs sayýsal deðer mantýklý deðil hep Guid vermek best practice : IdentityApý random Guid deðerler üretecek
+
+(migration iliþkisel dblerde.. no sql dbler igration kullanmaz çnk zaten þemalarý yok, nosql.tablo= collection, nosql.satýr=döküman)
+migration  yaptýðýmýz an Identity tablolarý oluþacak.  
+
+add-migration initial
+update-database
