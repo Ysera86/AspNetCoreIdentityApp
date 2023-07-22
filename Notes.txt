@@ -30,3 +30,23 @@ role,claim,policy bazlý yetkilendirmeler  cookie içine yazýlýr.
 
 AspNetUserLogins > fbden girdi, google dan girdi vs. cookie içinden  gelecek bu bilgi. müdahale etmeyiz genelde.
 AspNetUserToken > fbden gelen tooken vs. access ve refresh tokenlarý tutabiliriz.
+
+---
+
+Home. SignUp endpointi ve onun viewýný ekledik. Bunun için SignUpViewModel ekledik ve bunu @model olarak vewde kullandýk. using oraya eklememk için de Views._ViewImports.cshtml içine 1 kere ekledik.
+
+viewlarda elementlerde asp-for="UserName" > labellarýn içleri boþ içn modeldeki DisplayNameden geliyor, diðerleri (input vs) için hem tip, hem Id hem name alanlarýný belirler
+
+---
+
+best practice asenkron yazmaktýr
+ancak asenkron programlama gücünü/hýzýný server yoðunken gösterir, threadleri bloklamadan çalýþtýðý için. onun dýþýnda fark göremeyiz çalýþmalarýnda
+
+UserManager<AppUser> : kullanýcý ile ilgili iþlemleri yapmak için kullanacaðýmýz sýnýf
+RoleManager<AppRole> :
+SignInManager : cookie oluþturma 3rdparty implement
+
+await : await : bana þimdi dön demek. ama threadi bloklamaz, thread burda beklemez. gidip baka iþler yapar sadee gözü kulaðý bu threadden dönecek cevaptadýr. Ama senkron olsaydý ve iþlem 10dk sürseydi program 10dk bu satýrda beklicekti.
+
+
+-- encrypt edilen decrypt edilebilir ama hashlenen geri alýnamaz. kontrl ederken de girilen þifreyi hashleyip dbdeki hashlenmiþ hali ile karþýlaþtýrýcaz.
