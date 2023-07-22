@@ -9,6 +9,9 @@ IdentityDbContext ten miras alýcaz. Ondan gelen entityler.
 IdentityUser
 IdentityRole
 
+bu entitylerde Normalized.. alanlar var, amaç indexleme en çok aranan alanlar için : username, email. bu normalized.. sütunlar indexlenmiþ alanlar ve arama ypýnca bunlara göre arama yapýlýr. non clustered index. /1 tabloda 1 tane clustered index olur o da pk) tabloda yavaþlama varsa : indexleme Ideneity methodlarýnda bu alanlardan çalýþan arama methodlarý halihazýrda var onlarý kullanýcaz.
+
+
 public class AppDbContext : IdentityDbContext<AppUser, AppRole, string> // random guid deðerler üretecek
 string için user ve role tablolarýnda primary key tipi alaný : int vs sayýsal deðer mantýklý deðil hep Guid vermek best practice : IdentityApý random Guid deðerler üretecek
 
@@ -17,3 +20,13 @@ migration  yaptýðýmýz an Identity tablolarý oluþacak.
 
 add-migration initial
 update-database
+
+
+claimler: kullanýcý hakkýnda bilgiler. key-value
+örn: City alaný üzerinden yetkilendirme yapmak istersek
+kimlik yetkilendirme yaptýðýmýz bir veri varsa o zaman claimde tutarýz , user tablosunda deðil.  Cookie içinde claimler yer aldýðý için. Claim bazlý yetkilendirme!
+RoleClaims : manager_read, manager_write vs olabilir. 
+role,claim,policy bazlý yetkilendirmeler  cookie içine yazýlýr.
+
+AspNetUserLogins > fbden girdi, google dan girdi vs. cookie içinden  gelecek bu bilgi. müdahale etmeyiz genelde.
+AspNetUserToken > fbden gelen tooken vs. access ve refresh tokenlarý tutabiliriz.
