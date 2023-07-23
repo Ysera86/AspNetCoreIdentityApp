@@ -39,6 +39,12 @@ namespace AspNetCoreIdentityApp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
             // hash : Password12 --> 32423l4jşlmfcldşsmfşlksjfmşsdof 
 
             var identityResult = await _userManager.CreateAsync(new() { UserName = request.UserName, PhoneNumber = request.Phone, Email = request.Email }, request.Password); // passwordu hashlicak (geri döndürülemez):güvenli
